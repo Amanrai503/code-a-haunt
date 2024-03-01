@@ -6,8 +6,8 @@ import win32ui
 from time import time
 
 
-def win_cap():
-    hwnd = win32gui.FindWindow(None, 'Clash of Clans')
+def win_cap(w_name):
+    hwnd = win32gui.FindWindow(None,w_name )#'Clash of Clans'
     win_rect = win32gui.GetWindowRect(hwnd)
     w = (win_rect[2] - win_rect[0]) - 12
     h = (win_rect[3] - win_rect[1]) - 32

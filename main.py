@@ -1,19 +1,34 @@
 import cv2
-import numpy
-from win_capture import win_cap
-import tkinter as tk
-cascade_t = cv2.CascadeClassifier('csds\\cascade.xml')
+from detect import run_dect
 
-#def run_dect():
-while True:
-    screenshot = win_cap()
-    #screenshot = numpy.array(screenshot)
-    rect = cascade_t.detectMultiScale(screenshot)
-    for i in rect:
-        x, y, w, h = i
-        cv2.rectangle(screenshot, (x, y), (x + w, y + h), color=(0, 0, 225), thickness=3)
-    cv2.imshow("gold_storage", screenshot)
-    key = cv2.waitKey(1)
-    if key == ord("q"):
-        cv2.destroyAllWindows()
-        break
+
+
+import tkinter as tk
+
+def custom_detect():
+    xml_file = (entry1.get())#'csds\\cascade.xml'
+    w_name = (entry2.get())
+    run_dect(xml_file,w_name)
+
+
+
+# Create the main window
+root = tk.Tk()
+root.title("ML detector")
+
+# Create entry fields
+entry1 = tk.Entry(root)
+entry2 = tk.Entry(root)
+
+# Create a button to perform the addition
+calculate_button = tk.Button(root, text="Detect", command=custom_detect)
+
+# Arrange widgets using grid
+entry1.grid(row=0, column=0)
+entry2.grid(row=1, column=0)
+
+calculate_button.grid(row=2, column=0)
+
+# Start the GUI event loop
+root.mainloop()
+
